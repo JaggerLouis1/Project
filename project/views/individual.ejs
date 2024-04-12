@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello!</title>
+  <meta name="description" content="description"/>
+  <meta name="author" content="author" />
+  <meta name="keywords" content="keywords" />
+  <link rel="stylesheet" href="./stylesheet.css" type="text/css" />
+  <style type="text/css">.body { width: auto; }</style>
+</head>
+<body>
+  <div class="card-container">
+    <% result.forEach(function(product) { %>
+      <div class="card">
+        <div class="card-content">
+          <p class="card-text"><strong>Id:</strong> <%= product.id %></p>
+          <p class="card-text"><strong>Title:</strong> <%= product.title %></p>
+          <p class="card-text"><strong>Brand:</strong> <%= product.brand %></p>
+          <p class="card-text"><strong>Price:</strong> <%= product.price %></p>
+          <p class="card-text"><strong>Calibre:</strong> <%= product.calibre %></p>
+          <img src="/<%= product.image %>" class="card-image">
+          <button onclick="toggleDetails('<%= product.id %>')">View Details</button>
+          <a href="/individual/<%= product.id %>" target="_blank">View Individual Phone</a>
+          <div id="details<%= product.id %>" class="phone-details" style="display: none;">
+            <!-- Individual phone details -->
+            <p><strong>Id:</strong> <%= product.id %></p>
+            <p><strong>Title:</strong> <%= product.title %></p>
+            <p><strong>Brand:</strong> <%= product.brand %></p>
+            <p><strong>Price:</strong> <%= product.price %></p>
+            <p><strong>Calibre:</strong> <%= product.calibre %></p>
+            <img src="/<%= product.image %>" class="phone-image">
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+  <footer>
+    <a href="/add">Add A Phone</a>
+  </footer>
+  <script>
+    function toggleDetails(productId) {
+      var details = document.getElementById('details' + productId);
+      var allDetails = document.getElementsByClassName('phone-details');
+      for (var i = 0; i < allDetails.length; i++) {
+        if (allDetails[i].id === 'details' + productId) {
+          if (allDetails[i].style.display === 'none' || allDetails[i].style.display === '') {
+            allDetails[i].style.display = 'block';
+          } else {
+            allDetails[i].style.display = 'none';
+          }
+        } else {
+          allDetails[i].style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
+
+
